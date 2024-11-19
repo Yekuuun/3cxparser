@@ -101,19 +101,19 @@ func ParseFile(cmd *cobra.Command, args []string) error {
 		for i, num := range numbers {
 			formatted += fmt.Sprintf(";s/^%d/%s/", 10+i, num)
 		}
-		formatted += "/;s/[+]//;"
+		formatted += ";s/[+]//;"
 	case 10:
 		formatted = "s/^(?!(42)).*$/1${R:[0-9]1}/"
 		for i, num := range numbers {
 			formatted += fmt.Sprintf(";s/^%d/%s/", 10+i, num)
 		}
-		formatted += "/;s/[+]//;"
+		formatted += ";s/[+]//;"
 	case 26:
 		formatted = "s/.*/${R:[a-z]1}/"
 		for i, num := range numbers {
 			formatted += fmt.Sprintf(";s/^%c/%s/", 'a'+rune(i), num)
 		}
-		formatted += "/"
+		formatted += ";"
 	default:
 		return fmt.Errorf("[!] ERROR : Nombre de lignes non pris en charge")
 	}

@@ -67,4 +67,5 @@ func Execute() {
 
 	fmt.Printf("\n\n")
 	fmt.Print("Ciao....")
+	os.Exit(0) //end.
 }
