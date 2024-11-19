@@ -11,7 +11,6 @@ import (
 
 var Parser *cobra.Command
 
-// Fonction pour vérifier si le fichier existe
 func FileExist(filePath string) bool {
 	_, err := os.Stat(filePath)
 	return !os.IsNotExist(err)
