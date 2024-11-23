@@ -13,6 +13,20 @@ var rootCmd = &cobra.Command{
 	Use:          "3cxparser",
 	SilenceUsage: true,
 	Short:        "A simple 3cx phone number parser for DID pool config",
+	Run: func(cmd *cobra.Command, args []string) {
+
+		filePath, err := cmd.Flags().GetString("file")
+		if err != nil {
+			fmt.Println("Erreur : Veuillez fournir un fichier avec l'option --file.")
+			os.Exit(1)
+		}
+
+		parserFunc := ParseFile(filePath)
+		if parserFunc != nil {
+			fmt.Printf("Erreur lors de l'analyse du fichier : %s\n", err)
+			os.Exit(1)
+		}
+	},
 }
 
 var MainContext context.Context
@@ -68,4 +82,9 @@ func Execute() {
 	fmt.Printf("\n\n")
 	fmt.Print("Ciao....")
 	os.Exit(0) //end.
+}
+
+func init() {
+	rootCmd.Flags().StringP("file", "f", "", "Path to excel file")
+	rootCmd.MarkFlagRequired("file")
 }

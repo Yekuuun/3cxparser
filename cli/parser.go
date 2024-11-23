@@ -5,23 +5,14 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
-	"github.com/spf13/cobra"
 )
-
-var Parser *cobra.Command
 
 func FileExist(filePath string) bool {
 	_, err := os.Stat(filePath)
 	return !os.IsNotExist(err)
 }
 
-func ParseFile(cmd *cobra.Command, args []string) error {
-
-	filePath, err := cmd.Flags().GetString("file")
-	if err != nil {
-		return fmt.Errorf("[!] ERROR : l'argument file n'a pas été trouvé")
-	}
+func ParseFile(filePath string) error {
 
 	// Remplacer les antislashs par des slashs dans le chemin du fichier
 	filePath = strings.Replace(filePath, "\\", "/", -1)
@@ -123,17 +114,4 @@ func ParseFile(cmd *cobra.Command, args []string) error {
 
 	fmt.Println("Traitement terminé. Résultats enregistrés dans resultats.txt.")
 	return nil
-}
-
-func init() {
-	Parser = &cobra.Command{
-		Use:   "parser",
-		Short: "Parse phone numbers from excel file",
-		RunE:  ParseFile,
-	}
-
-	Parser.Flags().StringP("file", "f", "", "Path to excel file")
-	Parser.MarkFlagRequired("file")
-
-	rootCmd.AddCommand(Parser)
 }
