@@ -17,5 +17,3 @@
 `./3cxparser --file <path_vers_fichier.csv>`
 
 ---
-
-![SAMPLE](https://github.com/Yekuuun/3cxparser/blob/main/assets/sample.png)
